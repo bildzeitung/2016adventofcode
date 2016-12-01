@@ -17,8 +17,7 @@ DIRF = {'R': lambda x: (x+1) % 4,
         }
 
 for line in sys.stdin:
-    turns = [x.strip() for x in line.split(',')]
-    for turn in turns:
+    for turn in [x.strip() for x in line.split(',')]:
         d, c = turn[0], int(turn[1:])
         CDIR = DIRF[d](CDIR)
         for _ in range(c):
