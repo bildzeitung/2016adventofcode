@@ -12,15 +12,9 @@ def isreal(room, checksum):
     for idx, letter in enumerate(room):
         track[letter].append(idx)
 
-    def decider(x, y):
-        lx = len(track[x])
-        ly = len(track[y])
-        if lx == ly:
-            return ord(x) - ord(y)
-
-        return ly - lx
-
-    strack = sorted(track, cmp=decider)[0:5]
+    strack = sorted(track,
+                    cmp=lambda x, y: cmp(len(track[y]), len(track[x])) or cmp(x, y)
+                    )[0:5]
     return not sum(x[0] != x[1] for x in zip(strack, checksum))
 
 
