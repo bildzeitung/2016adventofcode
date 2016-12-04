@@ -2,20 +2,19 @@
 
 import re
 import sys
-from collections import defaultdict
+from collections import Counter
 
 ROOMRE = re.compile(r'(.+)\[(.+)\]')
 
 
-def isreal(room, checksum):
-    track = defaultdict(list)
-    for idx, letter in enumerate(room):
-        track[letter].append(idx)
+def isreal(sector, room, checksum):
+    strack = ''.join([z[0] for z in sorted(Counter(room).most_common(),
+                                           key=lambda (x, y): (-y, x)
+                                           )][0:5])
+    if strack == checksum:
+        return sector
 
-    strack = sorted(track,
-                    cmp=lambda x, y: cmp(len(track[y]), len(track[x])) or cmp(x, y)
-                    )[0:5]
-    return not sum(x[0] != x[1] for x in zip(strack, checksum))
+    return 0
 
 
 total = 0
@@ -24,7 +23,6 @@ for line in sys.stdin:
     sector = int(room.split('-')[-1])
     room = ''.join(room.split('-')[:-1])
 
-    if isreal(room, checksum):
-        total += sector
+    total += isreal(sector, room, checksum)
 
 print total
