@@ -21,8 +21,6 @@ def resolve(line):
             is_collecting = False
             span, repeats = [int(y) for y in collect.split('x')]
             output += resolve(line[idx:idx+span]) * repeats
-            # line = line[idx+span:]
-            # idx = 0
             idx += span
             continue
 
