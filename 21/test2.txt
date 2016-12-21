@@ -1,0 +1,8 @@
+rotate based on position of letter d
+rotate based on position of letter b
+move position 3 to position 0
+move position 1 to position 4
+rotate left 1 step
+reverse positions 0 through 4
+swap letter d with letter b
+swap position 4 with position 0
